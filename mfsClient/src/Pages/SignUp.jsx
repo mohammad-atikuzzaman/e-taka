@@ -4,11 +4,10 @@ import { Typewriter } from "react-simple-typewriter";
 import { useState } from "react";
 import { FaEye } from "react-icons/fa";
 import axiosPublic from "../Hooks/axiosPublic";
-import axios from "axios";
 
 const SignUp = () => {
   const [type, setType]= useState(true)
- const publicAxios = axiosPublic()
+  const useAxiosPublic = axiosPublic()
   const handleSignUp = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -20,10 +19,11 @@ const SignUp = () => {
       role: form.role.value
     }
     console.log(userInfo)
-    publicAxios.post("/register", {name: "akash"})
-    .then(res =>{
-      console.log(res.data)
-    })
+
+    useAxiosPublic.post("/register", userInfox)
+    .then(res => console.log(res.data))
+    .catch(err => console.error(err))
+
   };
   return (
     <div className="text-center container mx-auto h-screen flex flex-col items-center justify-center">
